@@ -1,0 +1,17 @@
+db.driver=com.mysql.jdbc.Driver
+db.url=jdbc:mysql://localhost/vlove?useUnicode=true&characterEncoding=UTF-8
+db.user=clog
+db.password=341414
+
+mail.transport.protocol=smtp
+mail.smtp.host=smtp.gmail.com
+mail.smtp.port=587
+mail.smtp.starttls.enable=true
+mail.smtp.auth=true
+mail.user=sodakaigomara@gmail.com
+mail.password=gia1malaka
+
+vlove.admin.email=sodakaigomara@gmail.com
+vlove.admin.pass=341414
+
+vlove.photo.source=src/main/webapp/photos/

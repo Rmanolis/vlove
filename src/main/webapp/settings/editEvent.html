@@ -1,0 +1,82 @@
+<lift:surround with="default" at="content">
+	<div class="lift:EditEvent?form=post;multipart=true">
+
+		<span id="name"></span>
+		<br />
+		<span id="introduction"></span>
+		<br />
+		<span>Ημερομηνία έναρξης</span>
+		<span id="startSelectDay"></span>
+		<span id="startSelectMonth"></span>
+		<span id="startSelectYear"></span>
+		<span id="startSelectHour"></span>
+		<span id="startSelectMinute"></span>
+		<br />
+		<span>Ημερομηνία λήξης</span>
+		<span id="endSelectDay"></span>
+		<span id="endSelectMonth"></span>
+		<span id="endSelectYear"></span>
+		<span id="endSelectHour"></span>
+		<span id="endSelectMinute"></span>
+		<br />
+<span id="county"></span>
+  	<br />
+		<span id="lat"></span>
+		<span id="lon"></span>
+		<br />
+		<span id="upload"></span>
+		<br />
+		<span id="submit"></span>
+	</div>
+
+	<div id="map_canvas" style="width: 300px; height: 300px"></div>
+	<script  type="text/javascript">
+		var map;
+		var mapOptions;
+		var oldMarker;
+		var marker;
+		function initialize() {
+
+			mapOptions = {
+				zoom : 6,
+				center : new google.maps.LatLng(38.01861070670554, 23.625567382812505),
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+
+			map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+			var lt = document.getElementById('lat').value;
+			var ln = document.getElementById('lon').value;
+
+			if (lt != "" && ln != "") {
+				var lat = parseFloat(document.getElementById('lat').value);
+				var lon = parseFloat(document.getElementById('lon').value);
+				var myLatlng = new google.maps.LatLng(lat, lon);
+
+				placeMarker(myLatlng);
+			}
+			google.maps.event.addListener(map, 'click', function(event) {
+				document.getElementById('lat').value = event.latLng.lat();
+				document.getElementById('lon').value = event.latLng.lng();
+				//alert(event.latLng.lat()+" "+event.latLng.lng())
+				placeMarker(event.latLng);
+			});
+
+			function placeMarker(location) {
+
+				marker = new google.maps.Marker({
+					position : location,
+					map : map
+
+				});
+
+				if (oldMarker != undefined) {
+					oldMarker.setMap(null);
+				}
+				oldMarker = marker;
+				map.setCenter(location);
+
+			}
+
+		};
+	</script>
+</lift:surround>

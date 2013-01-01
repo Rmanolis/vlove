@@ -1,0 +1,83 @@
+<lift:surround with="default" at="content">
+	<div class="lift:ViewEvent?form=post">
+		<span id="img"></span>
+		<br/>
+		<span id="name"></span>
+		<br/>
+		<span id="introduction"></span>
+		<br/>
+		<span id="creator"></span>
+		<br/>
+		<span id="flag"></span>
+		<br/>
+		<span id="lat"></span>
+		<br/>
+		<span id="lon"></span>
+		<br/>
+		<span id="checkCounty"></span>
+
+	</div>
+
+	<div id="map_canvas" style="width: 300px; height: 300px"></div>
+
+	<h1>Messages</h1>
+	<div class="lift:AddCommentCometSnippet"></div>
+	<div class="lift:AddCommentSnippet?form=post">
+		<span id="limits"></span>
+		<span id="message"></span>
+		<span id="submit"></span>
+	</div>
+	<br/>
+	<ul id="comments"></ul>
+
+	<script  type="text/javascript">
+		var map;
+		var mapOptions;
+		var oldMarker;
+		var marker;
+		var geocoder;
+		function initialize() {
+
+			mapOptions = {
+				zoom : 6,
+				center : new google.maps.LatLng(38.01861070670554, 23.625567382812505),
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+
+			map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+			var lt = document.getElementById('lat').innerHTML;
+			var ln = document.getElementById('lon').innerHTML;
+			geocoder = new google.maps.Geocoder();
+			if (lt != "" && ln != "") {
+				var lat = parseFloat(lt);
+				var lon = parseFloat(ln);
+				var myLatlng = new google.maps.LatLng(lat, lon);
+				geocoder.geocode({
+					'latLng' : myLatlng
+				}, function(results, status) {
+					
+						//alert(JSON.stringify(results[0].address_components) + " " + status);
+					
+				});
+				placeMarker(myLatlng);
+			}
+
+			function placeMarker(location) {
+
+				marker = new google.maps.Marker({
+					position : location,
+					map : map
+
+				});
+
+				if (oldMarker != undefined) {
+					oldMarker.setMap(null);
+				}
+				oldMarker = marker;
+				map.setCenter(location);
+
+			}
+
+		};
+	</script>
+</lift:surround>
