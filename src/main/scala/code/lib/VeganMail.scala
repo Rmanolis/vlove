@@ -38,7 +38,7 @@ object VeganMail {
 
   def sendConfirmationEmail(recipient: String,user:User) {
     Mailer.sendMail(From("rmanolis@live.com"), Subject("Επικυρώστε τον λογαριασμό σας"),
-      List(PlainMailBodyType("Μπείτε σε αυτή την ιστοσελίδα για να επικυρωθεί ο λογαριασμός σας http://0.0.0.0:8080/firstly/confirmation/"+ user.confirmation.is), To(recipient)): _*)
+      List(PlainMailBodyType("Μπείτε σε αυτή την ιστοσελίδα για να επικυρωθεί ο λογαριασμός σας "+Props.get("vlove.dns").getOrElse("http://0.0.0.0:8080/")+"firstly/confirmation/"+ user.confirmation.is), To(recipient)): _*)
       
   }
 

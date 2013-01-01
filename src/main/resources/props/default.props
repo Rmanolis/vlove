@@ -11,6 +11,7 @@ mail.smtp.auth=true
 mail.user=sodakaigomara@gmail.com
 mail.password=gia1malaka
 
+vlove.dns=http://0.0.0.0:8080/
 vlove.admin.email=sodakaigomara@gmail.com
 vlove.admin.pass=341414
 
